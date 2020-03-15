@@ -1,4 +1,5 @@
 # Video Rental System (Example)
+![](/UI/wwwroot/img/print1.png)
 
 ### Software Architecture:
 - [ ] 4-Tier (UI, BLL, BOL, DAL)
