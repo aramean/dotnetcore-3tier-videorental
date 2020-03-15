@@ -1,0 +1,39 @@
+﻿@model UI.Models.RentalViewModel
+
+<div class="text-center mb-4">
+    <h1 class="display-4">@Model.PageTitle</h1>
+</div>
+
+@if (Model.Items.Count() <= 0)
+{
+    <div class="alert alert-warning" role="alert">
+        @Model.PageNoResultText
+    </div>
+}
+else
+{
+    <table class="table table-hover table-dark table-sm table-bordered">
+        <thead>
+        <tr class="bg-dark">
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Item type</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach (var item in (dynamic) Model.Items)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Price</td>
+                <td>@item.RentalItemType</td>
+                <td class="text-right"><!--<a asp-controller="Rental" asp-action="Edit" asp-route-id="@item.RentalItemId" class="fa fa-pencil-square text-light" title="Edit rental"></a><a asp-controller="Rental" asp-action="Delete" asp-route-id="@item.RentalItemId" class="fa fa-trash ml-2 mr-1 text-warning" title="Remove rental" onclick="return confirm('Are you sure?')"></a>--></td>
+            </tr>
+        }
+    }
+        </tbody>
+    </table>
+}
+
+<a class="btn btn-primary float-right disabled" aria-pressed="false" autocomplete="off" asp-controller="Customer" asp-action="Add"><i class="fa fa-plus-square-o"></i> Add rental</a>

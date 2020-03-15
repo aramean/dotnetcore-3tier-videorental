@@ -1,0 +1,51 @@
+﻿@model UI.Models.CustomerRentalsViewModel
+@{
+    int totalitems = Model.Items.Count();
+    int ismember = Model.CustomerType;
+
+    decimal amount = 0;
+    decimal discount = 0;
+    decimal specialdiscount = Model.SpecialDiscounts;
+}
+
+    <div class="text-center mb-4">
+        <h1 class="display-4">@Model.PageTitle</h1>
+        <b>@Model.CustomerName</b> has <span class="badge badge-pill badge-info">@totalitems</span> rental items
+    </div>
+
+@if (totalitems <= 0)
+{
+    <div class="alert alert-warning" role="alert">
+        @Model.PageNoResultText
+    </div>
+}
+else
+{
+    <div class="card-deck">
+        @{
+            foreach (var item in (dynamic)Model.Items)
+            {
+                amount += item.RentalItem.Price;
+
+                if (ismember == 1)
+                {
+                    discount += item.RentalItem.Price * (decimal) (item.Discount*0.01);
+                }
+
+                <div class="card" style="max-width: 13rem;">
+                    <img src="@item.RentalItem.ImageUrl" class="card-img-top bg-primary" alt="@item.RentalItem.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.RentalItem.Title</h5>
+                        <p class="card-text">@item.RentalItem.Price SEK<small class="badge badge-danger float-right">@(item.Discount > 0 ? @item.Discount+"%" : "")</small></p>
+                        <p class="card-text"><small class="text-muted">@item.RentalItem.RentalItemType</small></p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}
+<hr />
+<h5>Amount <span class="badge badge-secondary">@amount SEK</span></h5>
+<h5>Discount <span class="badge badge-secondary badge-danger">-@discount.ToString("0.00") SEK</span></h5>
+<h5>Special Discount <span class="badge badge-secondary badge-danger">-@specialdiscount SEK</span></h5>
+<h2>Total Due <span class="badge badge-secondary badge-success">@((@amount - @discount - specialdiscount).ToString("0.00")) SEK</span></h2>

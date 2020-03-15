@@ -1,0 +1,41 @@
+﻿@model UI.Models.CustomersViewModel
+
+<div class="text-center mb-4">
+    <h1 class="display-4">@Model.PageTitle</h1>
+</div>
+
+@if (Model.Items.Count() <= 0)
+{
+    <div class="alert alert-warning" role="alert">
+        @Model.PageNoResultText
+    </div>
+}
+else
+{
+    <table class="table table-hover table-dark table-sm table-bordered">
+        <thead>
+        <tr class="bg-dark">
+            <th scope="col">#</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Customer type</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach (var customer in (dynamic) Model.Items)
+        {
+            <tr>
+                <th scope="row">@customer.CustomerId</th>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.CustomerType</td>
+                <td class="text-right"><span class="bg-primary border rounded"><a asp-controller="Customer" asp-action="Rentals" asp-route-id="@customer.CustomerId" class="fa fa-handshake-o text-light pr-3 pl-3" title="Show customer rentals"></a></span><span class="text-dark pr-2">|</span><a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId" class="fa fa-pencil-square text-light" title="Edit customer"></a><a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerId" class="fa fa-trash ml-2 mr-1 text-warning" title="Remove customer" onclick="return confirm('Are you sure?')"></a></td>
+            </tr>
+        }
+    }
+        </tbody>
+    </table>
+}
+
+<a class="btn btn-primary float-right" aria-pressed="false" autocomplete="off" asp-controller="Customer" asp-action="Add"><i class="fa fa-user-plus"></i> Add customer</a>
