@@ -78,7 +78,6 @@ namespace UI.Controllers
             if (customer == null)
                 return NotFound();
 
-            model.PageTitle = "Edit customer";
             model.FirstName = customer.FirstName;
             model.LastName = customer.LastName;
             model.CustomerType = (int)customer.CustomerType;
