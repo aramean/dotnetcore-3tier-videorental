@@ -41,11 +41,11 @@ namespace UI.Controllers
         }
 
         // GET: Customer/Add
-        public ActionResult Add()
+        public ActionResult Add(CustomersAddViewModel model)
         {
             ViewBag.PageTitle = "Add customer";
             ViewBag.Title = "Add customer";
-            return View();
+            return View(model);
         }
 
         // POST: Customer/Add
@@ -91,18 +91,23 @@ namespace UI.Controllers
         // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, IFormCollection collection, CustomerEditViewModel model)
         {
-            string firstname = collection["FirstName"];
-            string lastname = collection["LastName"];
-            string type = collection["CustomerType"];
+            if (ModelState.IsValid)
+            {
+                string firstname = collection["FirstName"];
+                string lastname = collection["LastName"];
+                string type = collection["CustomerType"];
 
-            var result = await customerLogic.EditCustomer(id, firstname, lastname, type);
+                var result = await customerLogic.EditCustomer(id, firstname, lastname, type);
 
-            if (result == null)
-                return View();
+                if (result != null)
+                    return RedirectToAction(nameof(Index));
+            }
 
-            return RedirectToAction(nameof(Index));
+            ViewBag.PageTitle = "Edit customer";
+            ViewBag.Title = "Edit customer";
+            return View(model);
         }
 
         // GET: Customer/Delete/5
