@@ -17,6 +17,7 @@ namespace DAL.Entities
     {
         [Key]
         public int RentalItemId { get; set; }
+        [Required]
         public string Title { get; set; }
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
