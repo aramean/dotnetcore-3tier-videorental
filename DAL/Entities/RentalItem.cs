@@ -18,7 +18,9 @@ namespace DAL.Entities
         [Key]
         public int RentalItemId { get; set; }
         [Required]
+        [MaxLength(128)]
         public string Title { get; set; }
+        [MaxLength(255)]
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public RentalItemTypeEnum RentalItemType { get; set; }

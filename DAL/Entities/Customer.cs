@@ -14,8 +14,10 @@ namespace DAL.Entities
         [Key]
         public int CustomerId { get; set; }
         [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
         [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
         public CustomerTypeEnum CustomerType { get; set; }
         public ICollection<CustomerRentalItem> CustomerRentalItem { get; set; }

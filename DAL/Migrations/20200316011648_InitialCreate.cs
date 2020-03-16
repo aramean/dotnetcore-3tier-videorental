@@ -12,8 +12,8 @@ namespace DAL.Migrations
                 {
                     CustomerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
                     CustomerType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -27,8 +27,8 @@ namespace DAL.Migrations
                 {
                     RentalItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: false),
-                    ImageUrl = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 128, nullable: false),
+                    ImageUrl = table.Column<string>(maxLength: 255, nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     RentalItemType = table.Column<int>(nullable: false)
                 },
