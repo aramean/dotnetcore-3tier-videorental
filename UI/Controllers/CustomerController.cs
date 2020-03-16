@@ -11,37 +11,31 @@ namespace UI.Controllers
         private readonly CustomerLogic customerLogic = new CustomerLogic();
 
         // GET: Customer
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CustomersViewModel model)
         {
             var items = await customerLogic.GetAllCustomers();
-            var model = new CustomersViewModel
-            {
-                PageTitle = "Customers",
-                PageNoResultText = "No customers found!",
-                Items = items
-            };
+            model.Items = items;
 
+            ViewBag.PageTitle = "Customers";
+            ViewBag.PageNoResultText = "No customers found!";
             ViewBag.Title = "Customers";
             return View(model);
         }
 
         // GET: Customer/Rentals/5
-        public async Task<IActionResult> Rentals(int id)
+        public async Task<IActionResult> Rentals(int id, CustomerRentalsViewModel model)
         {
             var customer = await customerLogic.GetCustomer(id);
             var items = await customerLogic.GetRentalsByCustomer(id);
             var customerspecialdiscount = customerLogic.CalculateSpecialDiscount(customer.CustomerId, (int)customer.CustomerType, items);
 
-            var model = new CustomerRentalsViewModel
-            {
-                PageTitle = "Customer rentals",
-                PageNoResultText = "No customer rentals found!",
-                Items = items,
-                SpecialDiscounts = customerspecialdiscount,
-                CustomerName = customer.FirstName+" "+customer.LastName,
-                CustomerType = (int) customer.CustomerType,
-            };
+            model.Items = items;
+            model.SpecialDiscounts = customerspecialdiscount;
+            model.CustomerName = customer.FirstName + " " + customer.LastName;
+            model.CustomerType = (int)customer.CustomerType;
 
+            ViewBag.PageTitle = "Customer rentals";
+            ViewBag.PageNoResultText = "No customer rentals found!";
             ViewBag.Title = "Customer rentals";
             return View(model);
         }
@@ -49,50 +43,47 @@ namespace UI.Controllers
         // GET: Customer/Add
         public ActionResult Add()
         {
-            var model = new CustomersAddViewModel
-            {
-                PageTitle = "Add customer"
-            };
-
+            ViewBag.PageTitle = "Add customer";
             ViewBag.Title = "Add customer";
-            return View(model);
+            return View();
         }
 
         // POST: Customer/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(IFormCollection collection)
+        public async Task<IActionResult> Add(IFormCollection collection, CustomersAddViewModel model)
         {
-            string firstname = collection["FirstName"];
-            string lastname = collection["LastName"];
-            string type = collection["CustomerType"];
+            if (ModelState.IsValid)
+            {
+                string firstname = collection["FirstName"];
+                string lastname = collection["LastName"];
+                string type = collection["CustomerType"];
 
-            var result = await customerLogic.CreateNewCustomer(firstname, lastname, type);
+                var result = await customerLogic.CreateNewCustomer(firstname, lastname, type);
 
-            if (result)
-                return RedirectToAction(nameof(Index));
+                if (result)
+                    return RedirectToAction(nameof(Index));
+            }
 
-            return View();
+            ViewBag.PageTitle = "Add customer";
+            ViewBag.Title = "Add customer";
+            return View(model);
         }
 
         // GET: Customer/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, CustomerEditViewModel model)
         {
             var customer = await customerLogic.GetCustomer(id);
             
             if (customer == null)
-            {
                 return NotFound();
-            }
 
-            var model = new CustomerEditViewModel
-            {
-                PageTitle = "Edit customer",
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                CustomerType = (int) customer.CustomerType
-            };
+            model.PageTitle = "Edit customer";
+            model.FirstName = customer.FirstName;
+            model.LastName = customer.LastName;
+            model.CustomerType = (int)customer.CustomerType;
 
+            ViewBag.PageTitle = "Edit customer";
             ViewBag.Title = "Edit customer";
             return View(model);
         }

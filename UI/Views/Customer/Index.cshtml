@@ -1,13 +1,13 @@
 ﻿@model UI.Models.CustomersViewModel
 
 <div class="text-center mb-4">
-    <h1 class="display-4">@Model.PageTitle</h1>
+    <h1 class="display-4">@ViewData["PageTitle"]</h1>
 </div>
 
 @if (Model.Items.Count() <= 0)
 {
     <div class="alert alert-warning" role="alert">
-        @Model.PageNoResultText
+        @ViewData["PageNoResultText"]
     </div>
 }
 else

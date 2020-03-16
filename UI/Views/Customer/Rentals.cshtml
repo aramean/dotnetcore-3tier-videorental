@@ -9,14 +9,14 @@
 }
 
     <div class="text-center mb-4">
-        <h1 class="display-4">@Model.PageTitle</h1>
+        <h1 class="display-4">@ViewData["PageTitle"]</h1>
         <b>@Model.CustomerName</b> has <span class="badge badge-pill badge-info">@totalitems</span> rental items
     </div>
 
 @if (totalitems <= 0)
 {
     <div class="alert alert-warning" role="alert">
-        @Model.PageNoResultText
+        @ViewData["PageNoResultText"]
     </div>
 }
 else

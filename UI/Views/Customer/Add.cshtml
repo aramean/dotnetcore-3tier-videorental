@@ -1,18 +1,20 @@
 ﻿@model UI.Models.CustomersAddViewModel
 
 <div class="text-center mb-4">
-    <h1 class="display-4">@Model.PageTitle</h1>
+    <h1 class="display-4">@ViewData["PageTitle"]</h1>
 </div>
 
 <form asp-controller="Customer" asp-action="Add" method="post">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputFirstName">First Name</label>
-            <input asp-for="FirstName" type="text" class="form-control" id="inputFirstName" required>
+            <input asp-for="FirstName" type="text" class="form-control" id="inputFirstName">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputLastName">Last Name</label>
-            <input asp-for="LastName" type="text" class="form-control" id="inputLastName" required>
+            <input asp-for="LastName" type="text" class="form-control" id="inputLastName">
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
     </div>
     <!--<div class="form-group">

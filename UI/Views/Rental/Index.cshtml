@@ -1,7 +1,7 @@
 ﻿@model UI.Models.RentalViewModel
 
 <div class="text-center mb-4">
-    <h1 class="display-4">@Model.PageTitle</h1>
+    <h1 class="display-4">@ViewData["PageTitle"]</h1>
 </div>
 
 @if (Model.Items.Count() <= 0)

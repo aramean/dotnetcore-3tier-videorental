@@ -12,14 +12,12 @@ namespace UI.Controllers
     {
         private readonly RentalLogic rentalLogic = new RentalLogic();
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(RentalViewModel model)
         {
-            var model = new RentalViewModel()
-            {
-                PageTitle = "Rentals",
-                PageNoResultText = "No rental items found!",
-                Items = await rentalLogic.GetAllRentals()
-            };
+            model.Items = await rentalLogic.GetAllRentals();
+
+            ViewBag.PageTitle = "Rentals";
+            ViewBag.PageNoResultText = "No rental items found!";
             ViewBag.Title = "Rentals";
             return View(model);
         }
