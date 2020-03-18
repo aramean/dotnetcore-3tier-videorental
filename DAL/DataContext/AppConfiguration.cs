@@ -7,14 +7,15 @@ namespace DAL.DataContext
     {
         public AppConfiguration()
         {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "UI/");
             var builder = new ConfigurationBuilder();
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "UI", "appsettings.json"); // Get json file from presentation layer, probably not the correct way to do it!
-            builder.AddJsonFile(path);
+            builder.AddJsonFile(path + "appsettings.json");
             var root = builder.Build();
-            var appSetting = root.GetSection("ConnectionStrings:DefaultConnection");
-            SqlConnectionString = appSetting.Value;
+            DbProvider = root.GetSection("DefaultDatabaseProvider").Value;
+            DbConnectionString = root.GetSection("DatabaseConnectionStrings:"+this.DbProvider+":DefaultConnection").Value;
         }
 
-        public string SqlConnectionString { get; internal set; }
+        public string DbConnectionString { get; internal set; }
+        public string DbProvider { get; internal set; }
     }
 }

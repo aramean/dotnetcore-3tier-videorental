@@ -11,7 +11,14 @@ namespace DAL.DataContext
             {
                 Settings = new AppConfiguration();
                 OpsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-                OpsBuilder.UseSqlServer(Settings.SqlConnectionString);
+                if (Settings.DbProvider == "InMemory")
+                {
+                    OpsBuilder.UseInMemoryDatabase(Settings.DbConnectionString);
+                }
+                else
+                {
+                    OpsBuilder.UseSqlServer(Settings.DbConnectionString);
+                }
                 DbOptions = OpsBuilder.Options;
             }
 
@@ -22,7 +29,9 @@ namespace DAL.DataContext
 
         public static OptionsBuild ops = new OptionsBuild();
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) {
+            Database.EnsureCreated();
+        }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerRentalItem> CustomersRentalItems { get; set; }

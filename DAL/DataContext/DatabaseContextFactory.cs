@@ -9,7 +9,7 @@ namespace DAL.DataContext
         {
             AppConfiguration appConfig = new AppConfiguration();
             var opsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            opsBuilder.UseSqlServer(appConfig.SqlConnectionString);
+            opsBuilder.UseSqlServer(appConfig.DbConnectionString);
             return new DatabaseContext(opsBuilder.Options); // Return dbContext to EF
         }
     }
