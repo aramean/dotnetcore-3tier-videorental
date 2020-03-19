@@ -28,8 +28,16 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar-light .navbar-nav .nav-link{
+    font-weight: 600;
+}
+
 a {
-  color: #0366d6;
+    color: #0366d6;
+}
+
+label{
+    font-weight: 500;
 }
 
 .btn-primary {
