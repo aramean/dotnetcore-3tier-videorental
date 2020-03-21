@@ -1,4 +1,4 @@
-=== HOW TO SETUP AND INSTALL ENVIRONMENT ===
+=== HOW TO RUN WITH MSSQL ===
 
 1) SETUP THE DATABASE SERVER (MANUAL)
 Make sure you have installed MSSQL https://go.microsoft.com/fwlink/?linkid=866662
