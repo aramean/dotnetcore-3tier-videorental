@@ -1,12 +1,16 @@
 === HOW TO RUN WITH MSSQL ===
 
-1) SETUP THE DATABASE SERVER (MANUAL)
+1) CHANGE DATABASE PROVIDER
+cd UI
+Edit appsettings.json and Change "DefaultDatabaseProvider" to "SQLServer"
+
+2) SETUP THE DATABASE SERVER (MANUAL)
 Make sure you have installed MSSQL https://go.microsoft.com/fwlink/?linkid=866662
 NOTE: Don't forget to activate the "sa" user and turn on SQL Server and Windows Authentication.
 NOTE: Restart the Service
 
-2) INSTALL DATABASE
+3) INSTALL DATABASE
 cd DAL & dotnet ef database update
 
-3) RUN PROJECT
+4) RUN PROJECT
 cd UI & dotnet run
