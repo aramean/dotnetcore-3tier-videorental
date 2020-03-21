@@ -1,0 +1,46 @@
+﻿@model UI.Models.RentalAddItemViewModel
+
+<div class="text-center mb-4">
+    <h1 class="display-4">@ViewData["PageTitle"]</h1>
+</div>
+
+<form asp-controller="Rental" asp-action="Add" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputTitle">Title</label>
+            <input asp-for="Title" type="text" class="form-control" id="inputTitle">
+            <span asp-validation-for="Title" class="text-danger small"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputTitle">Image URL</label>
+            <input asp-for="ImageUrl" type="text" class="form-control" id="inputImageUrl">
+            <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="inputPrice">Price</label>
+            <input asp-for="Price" type="text" class="form-control" id="inputPrice">
+            <span asp-validation-for="Price" class="text-danger small"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label w-100 pt-0">Type</label>
+        <div class="form-check form-check-inline">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input asp-for="RentalItemType" type="radio" id="customRadioInline1" class="custom-control-input" value="0" checked>
+                <label class="custom-control-label" for="customRadioInline1">DVD</label>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input asp-for="RentalItemType" type="radio" id="customRadioInline2" class="custom-control-input" value="1">
+                <label class="custom-control-label" for="customRadioInline2">Blu-Ray</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add item</button>
+</form>

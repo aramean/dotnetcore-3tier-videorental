@@ -20,5 +20,23 @@ namespace DAL.Functions
             return rentals;
         }
 
+        public async Task<RentalItem> AddRentalItem(string title, decimal price, string type)
+        {
+            int.TryParse(type, out int enumValue); // Convert string to int
+            //decimal.TryParse(price, out decimal price);// Convert string to decimal
+
+            var newRentalItem = new RentalItem
+            {
+                Title = title,
+                RentalItemType = (RentalItemTypeEnum)enumValue,
+            };
+            using (var context = new DatabaseContext(DatabaseContext.ops.DbOptions))
+            {
+                await context.RentalItems.AddAsync(newRentalItem);
+                await context.SaveChangesAsync();
+            }
+            return newRentalItem;
+        }
+
     }
 }
