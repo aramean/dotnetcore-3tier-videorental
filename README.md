@@ -8,6 +8,7 @@
 
 ### Database
 - [x] MSSQL
+- [x] InMemory (default)
 
 ### Database ORM
 - [x] Entity Framework
