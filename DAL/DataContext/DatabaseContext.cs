@@ -59,8 +59,8 @@ namespace DAL.DataContext
                 new RentalItem { RentalItemId = 4, Title = "Looper", Price = 30, RentalItemType = RentalItemTypeEnum.DVD, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTg5NTA3NTg4NF5BMl5BanBnXkFtZTcwNTA0NDYzOA@@._V1_UX182_CR0,0,182,268_AL_.jpg" },
                 new RentalItem { RentalItemId = 5, Title = "Titanic", Price = 30, RentalItemType = RentalItemTypeEnum.DVD, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_UX182_CR0,0,182,268_AL_.jpg" },
                 new RentalItem { RentalItemId = 6, Title = "Star Wars: The Rise of Skywalker", Price = 90, RentalItemType = RentalItemTypeEnum.BLURAY, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDljNTQ5ODItZmQwMy00M2ExLTljOTQtZTVjNGE2NTg0NGIxXkEyXkFqcGdeQXVyODkzNTgxMDg@._V1_UX182_CR0,0,182,268_AL_.jpg" },
-                new RentalItem { RentalItemId = 7, Title = "Avatar", Price = 50, RentalItemType = RentalItemTypeEnum.BLURAY, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_UX182_CR0,0,182,268_AL_.jpg" },
-                new RentalItem { RentalItemId = 8, Title = "Avengers: End Game", Price = 80, RentalItemType = RentalItemTypeEnum.BLURAY, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UX182_CR0,0,182,268_AL_.jpg" });
+                new RentalItem { RentalItemId = 7, Title = "Avatar", Price = 50, RentalItemType = RentalItemTypeEnum.BLURAY, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UX182_CR0,0,182,268_AL_.jpg" },
+                new RentalItem { RentalItemId = 8, Title = "Avengers: End Game", Price = 80, RentalItemType = RentalItemTypeEnum.BLURAY, ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_UX182_CR0,0,182,268_AL_.jpg" });
 
             modelBuilder.Entity<CustomerRentalItem>().HasData(
                 new CustomerRentalItem { CustomerRentalId = 1, RentalItemId = 7, Discount = 15, CustomerId = 1 }, // Avatar (Blu-Ray)
