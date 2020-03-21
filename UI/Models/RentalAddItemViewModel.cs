@@ -12,7 +12,7 @@ namespace UI.Models
         [StringLength(256, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 10)]
         [Display(Name = "Image url")]
         public string ImageUrl { get; set; }
-        [Range(1, 100000)]
+        [Range(0, 100000)]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Price")]
