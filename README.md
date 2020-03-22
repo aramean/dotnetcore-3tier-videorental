@@ -7,8 +7,10 @@
 - [ ] Clean Architecture
 
 ### Database
-- [x] MSSQL
 - [x] InMemory (default)
+- [x] MSSQL
+- [x] PostgreSQL
+- [x] MySQL/MariaDB
 
 ### Database ORM
 - [x] Entity Framework
