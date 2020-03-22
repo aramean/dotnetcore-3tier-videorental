@@ -27,7 +27,7 @@ namespace UI.Controllers
         {
             var customer = await customerLogic.GetCustomer(id);
             var items = await customerLogic.GetRentalsByCustomer(id);
-            var customerspecialdiscount = customerLogic.CalculateSpecialDiscount(customer.CustomerId, (int)customer.CustomerType, items);
+            var customerspecialdiscount = customerLogic.CalculateSpecialDiscount((int)customer.CustomerType, items);
 
             model.Items = items;
             model.SpecialDiscounts = customerspecialdiscount;

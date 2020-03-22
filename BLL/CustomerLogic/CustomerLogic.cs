@@ -82,7 +82,7 @@ namespace BLL.CustomerLogic
         }
 
         // Calculate discounts of customer
-        public Decimal CalculateSpecialDiscount(int customerid, int customertype, IList<CustomerRentalItem> items)
+        public Decimal CalculateSpecialDiscount(int customertype, IList<CustomerRentalItem> items)
         {
             int total = items.Count;
             decimal discount = 0;
