@@ -23,26 +23,21 @@ namespace UI.Controllers
             return View(model);
         }
 
-        public IActionResult Add(RentalAddItemViewModel model)
+        public IActionResult Add()
         {
             ViewBag.PageTitle = "Add rental item";
             ViewBag.Title = "Add rental item";
-            return View(model);
+            return View();
         }
 
         // POST: Rental/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(IFormCollection collection, RentalAddItemViewModel model)
+        public async Task<IActionResult> Add([Bind("Title", "Price", "Type")] RentalAddItemViewModel model)
         {
             if (ModelState.IsValid)
             {
-                string title = collection["Title"];
-                decimal price = 0;
-                string type = collection["Type"];
-
-                var result = await rentalLogic.AddRentalItem(title, price, type);
-
+                var result = await rentalLogic.AddRentalItem(model.Title, model.Price, model.RentalItemType.ToString());
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
