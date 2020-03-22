@@ -5,6 +5,7 @@
 - [ ] 4-Tier (UI, BLL, BOL, DAL)
 - [x] 3-Tier (UI, BLL, DAL)
 - [ ] Clean Architecture
+- [ ] SOA
 
 ### Mechanism:
 - [x] Model binding
