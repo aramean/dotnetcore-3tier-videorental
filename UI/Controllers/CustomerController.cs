@@ -41,26 +41,21 @@ namespace UI.Controllers
         }
 
         // GET: Customer/Add
-        public ActionResult Add(CustomersAddViewModel model)
+        public ActionResult Add()
         {
             ViewBag.PageTitle = "Add customer";
             ViewBag.Title = "Add customer";
-            return View(model);
+            return View();
         }
 
         // POST: Customer/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(IFormCollection collection, CustomersAddViewModel model)
+        public async Task<IActionResult> Add([Bind("FirstName", "LastName", "CustomerType")] CustomersAddViewModel model)
         {
             if (ModelState.IsValid)
             {
-                string firstname = collection["FirstName"];
-                string lastname = collection["LastName"];
-                string type = collection["CustomerType"];
-
-                var result = await customerLogic.CreateNewCustomer(firstname, lastname, type);
-
+                var result = await customerLogic.CreateNewCustomer(model.FirstName, model.LastName, model.CustomerType.ToString());
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
@@ -71,16 +66,19 @@ namespace UI.Controllers
         }
 
         // GET: Customer/Edit/5
-        public async Task<IActionResult> Edit(int id, CustomerEditViewModel model)
+        public async Task<IActionResult> Edit(int id)
         {
             var customer = await customerLogic.GetCustomer(id);
             
             if (customer == null)
                 return NotFound();
 
-            model.FirstName = customer.FirstName;
-            model.LastName = customer.LastName;
-            model.CustomerType = (int)customer.CustomerType;
+            var model = new CustomerEditViewModel
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                CustomerType = (int)customer.CustomerType
+            };
 
             ViewBag.PageTitle = "Edit customer";
             ViewBag.Title = "Edit customer";
@@ -90,16 +88,11 @@ namespace UI.Controllers
         // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormCollection collection, CustomerEditViewModel model)
+        public async Task<IActionResult> Edit(int id, [Bind("FirstName", "LastName", "CustomerType")] CustomerEditViewModel model)
         {
             if (ModelState.IsValid)
             {
-                string firstname = collection["FirstName"];
-                string lastname = collection["LastName"];
-                string type = collection["CustomerType"];
-
-                var result = await customerLogic.EditCustomer(id, firstname, lastname, type);
-
+                var result = await customerLogic.EditCustomer(id, model.FirstName, model.LastName, model.CustomerType.ToString());
                 if (result != null)
                     return RedirectToAction(nameof(Index));
             }
