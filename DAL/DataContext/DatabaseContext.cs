@@ -11,14 +11,16 @@ namespace DAL.DataContext
             {
                 Settings = new AppConfiguration();
                 OpsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-                if (Settings.DbProvider == "InMemory")
-                {
-                    OpsBuilder.UseInMemoryDatabase(Settings.DbConnectionString);
-                }
-                else
-                {
+ 
+                if (Settings.DbProvider == "SQLServer")
                     OpsBuilder.UseSqlServer(Settings.DbConnectionString);
-                }
+                else if (Settings.DbProvider == "PostgreSQL")
+                    OpsBuilder.UseNpgsql(Settings.DbConnectionString);
+                else if (Settings.DbProvider == "MySQL")
+                    OpsBuilder.UseMySql(Settings.DbConnectionString);
+                else
+                    OpsBuilder.UseInMemoryDatabase(Settings.DbConnectionString);
+ 
                 DbOptions = OpsBuilder.Options;
             }
 
