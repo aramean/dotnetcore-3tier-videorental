@@ -6,6 +6,9 @@
 - [x] 3-Tier (UI, BLL, DAL)
 - [ ] Clean Architecture
 
+### Mechanism:
+- [x] Model binding
+
 ### Database
 - [x] InMemory (default)
 - [x] MSSQL
